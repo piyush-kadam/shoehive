@@ -1,0 +1,289 @@
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class SambaPage extends StatefulWidget {
+  const SambaPage({super.key});
+
+  @override
+  _SambaPageState createState() => _SambaPageState();
+}
+
+class _SambaPageState extends State<SambaPage> {
+  String selectedColor = ''; // Default color
+  int selectedSize = 0;
+  final List<int> availableSizes = [6, 7, 8, 9, 10, 11];
+
+  Future<void> addToCart(Map<String, dynamic> item) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> savedCart = prefs.getStringList('cart') ?? [];
+    savedCart.add(jsonEncode(item));
+    await prefs.setStringList('cart', savedCart);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.white,
+        content: Row(
+          children: [
+            const Icon(
+              Icons.shopping_cart,
+              color: Colors.black,
+              size: 30,
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                'Added Adidas Samba\nSize: $selectedSize, Color: $selectedColor to cart!',
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        ),
+        action: SnackBarAction(
+          label: 'UNDO',
+          textColor: Colors.blueAccent,
+          onPressed: () async {
+            savedCart.removeLast(); // Remove the last added item
+            await prefs.setStringList('cart', savedCart); // Update cart
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Item removed from the cart.'),
+                duration: Duration(seconds: 1),
+              ),
+            );
+          },
+        ),
+        duration: const Duration(seconds: 3),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        margin: const EdgeInsets.symmetric(
+          horizontal: 30,
+          vertical: 10,
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Adidas Samba',
+          style: GoogleFonts.poppins(),
+        ),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Product Images
+              SizedBox(
+                height: 220,
+                child: PageView(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.asset(
+                        'assets/images/adidas/samba 1.jpg', // Image for Bark Brown
+                        fit: BoxFit.contain,
+                        width: double.infinity,
+                      ),
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Image.asset(
+                        'assets/images/adidas/samba 2.jpg', // Image for Noble Maroon
+                        fit: BoxFit.contain,
+                        width: double.infinity,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              // Product Title and Price
+              Text(
+                'Adidas Samba',
+                style: GoogleFonts.poppins(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'Rs 2100',
+                style: GoogleFonts.poppins(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              const SizedBox(height: 10),
+
+              // Product Info
+              Text(
+                'Classic style and comfort with a timeless look.',
+                style: GoogleFonts.poppins(fontSize: 16),
+              ),
+              const SizedBox(height: 20),
+
+              // Select Color
+              Text(
+                'Color: $selectedColor',
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  // Green color option
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedColor = 'Green';
+                      });
+                    },
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: selectedColor == 'Green'
+                              ? Colors.black
+                              : Colors.grey,
+                          width: 2,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(width: 10),
+
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedColor = 'Noble Maroon';
+                      });
+                    },
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 225, 36, 36),
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: selectedColor == 'Noble Maroon'
+                              ? Colors.black
+                              : Colors.grey,
+                          width: 2,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 15),
+                  // Black & White color option
+                ],
+              ),
+              const SizedBox(height: 20),
+
+              // Select Size
+              Text(
+                'Select Size:',
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Wrap(
+                spacing: 8,
+                runSpacing: 10,
+                children: availableSizes.map((size) {
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedSize = size;
+                      });
+                    },
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color:
+                              selectedSize == size ? Colors.black : Colors.grey,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                        color:
+                            selectedSize == size ? Colors.black : Colors.white,
+                      ),
+                      child: Text(
+                        size.toString(),
+                        style: GoogleFonts.poppins(
+                          color: selectedSize == size
+                              ? Colors.white
+                              : Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+              const SizedBox(height: 20),
+
+              // Add to Cart Button
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: selectedSize == 0
+                      ? null
+                      : () {
+                          addToCart({
+                            'name': 'Adidas Samba',
+                            'size': selectedSize,
+                            'color': selectedColor,
+                            'price': 2100,
+                            'image': 'assets/images/adidas/samba 1.jpg',
+                          });
+                        },
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    backgroundColor: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: Text(
+                    'Add to Cart',
+                    style: GoogleFonts.poppins(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

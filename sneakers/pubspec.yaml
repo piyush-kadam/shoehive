@@ -1,0 +1,143 @@
+name: sneakers
+description: "A new Flutter project."
+
+publish_to: 'none'
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.4 <4.0.0'
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+
+  cupertino_icons: ^1.0.6
+  firebase_auth: ^5.3.4
+  firebase_core: ^3.8.1
+  flutter_native_splash: ^2.2.14
+  google_fonts: ^6.2.1
+  cloud_firestore: ^5.5.1
+  shared_preferences: ^2.3.3
+  curved_navigation_bar: ^1.0.6
+  cached_network_image: ^3.4.1
+  image_picker: ^1.1.2
+  firebase_storage: ^12.3.7
+  permission_handler: ^11.3.1
+  path_provider: ^2.1.5
+  geolocator: ^13.0.2
+  flutter_rating_bar: ^4.0.1
+  pdf: ^3.8.0
+  intl: ^0.20.1
+  smooth_page_indicator: ^1.0.0
+  
+  
+  
+  
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+  flutter_lints: ^4.0.0
+
+
+
+
+flutter:
+
+
+  uses-material-design: true
+
+
+  assets:
+    - assets/images/SH/sneaked.png
+    - assets/images/SH/nike1.jpg
+    - assets/images/SH/nike2.jpg
+    - assets/images/SH/converse.jpg
+    - assets/images/SH/converse2.jpg
+    - assets/images/SH/adidas.jpg
+    - assets/images/SH/SHOEHIVE.gif
+    - assets/images/nike/nike poster.jpg
+    - assets/images/nike/jordan 1 M.jpg
+    - assets/images/nike/jordan 1 1.jpg
+    - assets/images/nike/jordan 1 2.jpg
+    - assets/images/nike/air force M.jpg
+    - assets/images/nike/air force 1.jpg
+    - assets/images/nike/air force 2.jpg
+    - assets/images/nike/canary M.jpg
+    - assets/images/nike/canary 1.jpg
+    - assets/images/nike/canary 2.jpg
+    - assets/images/nike/travis M.jpg
+    - assets/images/nike/travis 1.jpg
+    - assets/images/nike/travis 2.jpg
+    - assets/images/adidas/adidas poster.jpg
+    - assets/images/converse/CONVERSE poster.jpg
+    - assets/images/NB/NB poster.jpg
+    - assets/images/NB/530 M.jpg
+    - assets/images/NB/530 1.jpg
+    - assets/images/NB/530 2.jpg
+    - assets/images/NB/9060 M.jpg
+    - assets/images/NB/9060 1.jpg
+    - assets/images/NB/9060 2.jpg
+    - assets/images/NB/550 M.jpg
+    - assets/images/NB/550 1.jpg
+    - assets/images/NB/550 2.jpg
+    - assets/images/NB/6r M.jpg
+    - assets/images/NB/6r 1.jpg
+    - assets/images/NB/6r 2.jpg
+    - assets/images/SH/new balance s.jpg
+    - assets/images/SH/adidas s.jpg
+    - assets/images/SH/Converse s.jpeg
+    - assets/images/SH/nike s.jpg
+    - assets/images/SH/avatar.jpg
+    - assets/images/converse/dd m.jpg
+    - assets/images/converse/dd 1.jpg
+    - assets/images/converse/dd 2.jpg
+    - assets/images/converse/dd 3.jpg
+    - assets/images/converse/blue M.jpg
+    - assets/images/converse/blue 1.jpg
+    - assets/images/converse/blue 2.jpg
+    - assets/images/converse/blue 3.jpg
+    - assets/images/converse/converse orange M.jpg
+    - assets/images/converse/orange 1.jpg
+    - assets/images/converse/orange 2.jpg
+    - assets/images/converse/Converse black M.jpg
+    - assets/images/converse/black 1.jpg
+    - assets/images/converse/black 2.jpg
+    - assets/images/adidas/samba M.jpg
+    - assets/images/adidas/c M.jpg
+    - assets/images/adidas/ss M.jpg
+    - assets/images/adidas/forum M.jpg
+    - assets/images/adidas/forum 1.jpg
+    - assets/images/adidas/forum 2.jpg
+    - assets/images/adidas/samba 1.jpg
+    - assets/images/adidas/samba 2.jpg
+    - assets/images/adidas/campus 1.jpg
+    - assets/images/adidas/c 2.jpg
+    - assets/images/adidas/ss 1.jpg
+    - assets/images/adidas/ss 2.jpg
+    - assets/images/adidas/ss 3.jpg
+
+
+flutter_native_splash:
+  color: "#000000"  # Black background
+  image: assets/images/sneaked.png  # Path to your splash screen image
+  android: true  # Enable splash screen for Android
+  ios: true  # Enable splash screen for iOS
+  fullscreen: true  # Use full-screen splash
+
+  android_12:
+    color: "#000000"  # Black background
+    image: assets/images/sneaked.png  # Path to your splash screen image
+    android: true  # Enable splash screen for Android
+    ios: true  # Enable splash screen for iOS
+    fullscreen: true  # Use full-screen splash
+
